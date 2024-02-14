@@ -1,4 +1,18 @@
-# Lab 2: Statistics in hydrology
+# Lab 3: Statistics in hydrology (33 pts)
+
+Reading for this lab:
+
+[Statistical Methods in Water Resources: Chapter 1](https://pubs.usgs.gov/tm/04/a03/tm4a3.pdf){target="_blank"}
+
+Questions from the reading (3 pts):
+
+1. Describe the difference between a histogram, pdf, and cdf. 
+
+2. Why is the median more useful than the mean value in hydrology?
+
+3. What is the Weibull plotting and what do we use it for? 
+
+Repo for this lab:
 
 Address each of the questions in the code chunk below and/or by typing outside the chunk (for written answers).
 

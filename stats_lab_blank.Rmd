@@ -6,7 +6,21 @@ output:
     toc_float: true
 ---
 
-# Lab 2: Statistics in hydrology (30 pts)
+# Lab 3: Statistics in hydrology (33 pts)
+
+Reading for this lab:
+
+[Statistical Methods in Water Resources: Chapter 1](https://pubs.usgs.gov/tm/04/a03/tm4a3.pdf){target="_blank"}
+
+Questions from the reading (3 pts):
+
+1. Describe the difference between a histogram, pdf, and cdf. 
+
+2. Why is the median more useful than the mean value in hydrology?
+
+3. What is the Weibull plotting and what do we use it for? 
+
+Repo for this lab:
 
 [**The repo for this lab can be found here**](https://github.com/tpcovino/lab_2){target="_blank"}
 
@@ -20,7 +34,7 @@ Load the tidyverse and patchwork libraries and read in the flashy and pine_nfdr 
 
 ```
 
-Using the flashy dataset, generate two new dataframes. One for the "WestMnts" and one for the "NorthEast" AGGECOREGION. Name these flashy_west and flasy_ne. Next make pdfs of the average basin rainfall (PPTAVG_BASIN) for the WestMnts (flashy_west) and NorthEast (flashy_ne) agricultural ecoregions. On each pdf add vertical lines showing the mean and median. Label the x axis "Average precipitation (mm)" and the y "Density". Set the x scale limits to 0 - 500 using xlim(c(0, 500)). Save each ggplot as an object and stack them on top of each other. Provide a caption below the figure that states which is on top, which is on bottom, and which color is the mean and which is the median. 
+Using the flashy dataset, generate two new dataframes. One for the "WestMnts" and one for the "NorthEast" AGGECOREGION. Name these flashy_west and flashy_ne. Next make pdfs of the average basin rainfall (PPTAVG_BASIN) for the WestMnts (flashy_west) and NorthEast (flashy_ne) agricultural ecoregions. On each pdf add vertical lines showing the mean and median. Label the x axis "Average precipitation (mm)" and the y "Density". Set the x scale limits to 0 - 500 using xlim(c(0, 500)). Save each ggplot as an object and stack them on top of each other. Provide a caption below the figure that states which is on top, which is on bottom, and which color is the mean and which is the median. 
 
 ```{r}
 # Make the ggplot for the NE

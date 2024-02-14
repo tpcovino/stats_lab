@@ -54,9 +54,12 @@ west <- flashy_west %>%
   xlim(c(0, 500))
 ```
 
+
 ```{r}
 ne/west
 ```
+
+PDFs of precipitation for the Northeast (top) and West Mountains (bottom) agricultural ecoregions. The blue lines represent mean and light blue show median P values
 
 ## Problem 2
 Calculate the SD and IQR for precipitation for the MtnsWest and Northeast ag-ecoregions. Using the SD, IQR and density plots from above, comment on the distributions of precipitation for the MtnsWest and Northeast ag-ecoregions. Which has a larger spread?  

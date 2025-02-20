@@ -1,0 +1,139 @@
+# Lab 3: Statistics in hydrology (25 pts)
+
+Knitr settings for knitting .Rmd to .html
+```{r}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, results = FALSE, include = FALSE)
+
+```
+
+
+Reading for this lab: 
+
+[Statistical Methods in Water Resources: Chapter 1](https://pubs.usgs.gov/tm/04/a03/tm4a3.pdf){target="_blank"}
+
+Questions from the reading (3 pts):
+
+1. Describe the difference between a histogram, pdf, and cdf. 
+
+2. Why is the median more useful than the mean value in hydrology?
+
+3. What is the Weibull plotting and what do we use it for? 
+
+Repo for this lab:
+
+[**The repo for this lab can be found here**](https://github.com/tpcovino/08_stats_lab){target="_blank"}
+
+Address each of the questions in the code chunk below and/or by typing outside the chunk (for written answers).
+
+## Problem 1 (3 pts)
+Load the tidyverse and patchwork libraries and read in the flashy and pine_nfdr datasets.
+
+```{r}
+library(tidyverse)
+library(patchwork)
+
+flashy <- read_csv("flashy.csv")
+pine_nfdr <- read_csv("pine_nfdr.csv")
+
+```
+
+Using the flashy dataset, generate two new dataframes. One for the "WestMnts" and one for the "NorthEast" AGGECOREGION. Name these flashy_west and flasy_ne. Next make pdfs of the average basin rainfall (PPTAVG_BASIN) for the WestMnts (flashy_west) and NorthEast (flashy_ne) agricultural ecoregions. On each pdf add vertical lines showing the mean and median. Label the x axis "Average precipitation (mm)" and the y "Density". Set the x scale limits to 0 - 500 using xlim(c(0, 500)). Save each ggplot as an object and stack them on top of each other. Provide a caption below the figure that states which is on top, which is on bottom, and which color is the mean and which is the median. 
+
+```{r}
+# Make the ggplot for the NE
+
+flashy_ne <- flashy %>% 
+  filter(AGGECOREGION == "NorthEast")
+  
+mean_ppt_ne <- mean(flashy_ne$PPTAVG_BASIN) 
+median_ppt_ne <- median(flashy_ne$PPTAVG_BASIN) 
+
+ne <- flashy_ne %>% 
+  ggplot(aes(PPTAVG_BASIN)) +
+  stat_density() +
+  geom_vline(xintercept = mean_ppt_ne, color = "blue") +
+  geom_vline(xintercept = median_ppt_ne, color = "light blue") +
+  labs(x = "", y = "Density") +
+  xlim(c(0, 500))
+
+```
+
+```{r}
+# Make the ggplot for the Mountain West
+
+flashy_west <- flashy %>% 
+  filter(AGGECOREGION == "WestMnts")
+  
+mean_ppt_west <- mean(flashy_west$PPTAVG_BASIN) 
+median_ppt_west <- median(flashy_west$PPTAVG_BASIN) 
+
+
+west <- flashy_west %>% 
+  ggplot(aes(PPTAVG_BASIN)) +
+  stat_density() +
+  geom_vline(xintercept = mean_ppt_west, color = "blue") +
+  geom_vline(xintercept = median_ppt_west, color = "light blue") +
+  labs(x = "Average precipitation (mm)", y = "Density") +
+  xlim(c(0, 500))
+```
+
+
+```{r}
+ne/west
+```
+
+PDFs of precipitation for the Northeast (top) and West Mountains (bottom) agricultural ecoregions. The blue lines represent mean and light blue show median P values
+
+## Problem 2 (3 pts)
+Calculate the SD and IQR for precipitation for the MtnsWest and Northeast ag-ecoregions. Using the SD, IQR and density plots from above, comment on the distributions of precipitation for the MtnsWest and Northeast ag-ecoregions. Which has a larger spread?  
+
+```{r}
+sd_west <- sd(flashy_west$PPTAVG_BASIN)
+iqr_west <- IQR(flashy_west$PPTAVG_BASIN)
+
+sd_ne <- sd(flashy_ne$PPTAVG_BASIN)
+iqr_ne <- IQR(flashy_ne$PPTAVG_BASIN)
+```
+
+
+## Problem 3 (4 pts)
+Next, make Q-Q plots and perform a Shapiro-Wilk tests for normality on the precipitation data sets for the MtnsWest and Northeast ag-ecoregions. Using the results from these tests discuss whether or not the distributions are normal. Also if you based your decision as to whether the data sets were normal on the pdfs you developed in problem 1, the Q-Q test, and Shapiro-Wilk test would each lead you to same conclusion? 
+
+```{r}
+shap_west <- shapiro.test(flashy_west$PPTAVG_BASIN)
+
+qqnorm(flashy_west$PPTAVG_BASIN)
+
+shap_ne <- shapiro.test(flashy_ne$PPTAVG_BASIN)
+
+qqnorm(flashy_ne$PPTAVG_BASIN)
+
+```
+
+## Problem 4 (5 pts)
+Make a plot that shows the distribution of the data from the PINE watershed and the NFDR watershed (two pdfs on the same plot). Log the x axis, label the x axis "Flow (cfs)" and the y axis "Density". 
+
+```{r}
+pine_nfdr %>% 
+  ggplot(aes(cfs, fill = StationID)) +
+  geom_density(alpha = 0.5) +
+  scale_x_log10() +
+  labs(x = "Flow (cfs)", y = "Density", fill = "Station")
+
+```
+
+## Problem 5 (5 pts)
+You want to compare how variable the discharge is in each of the watersheds in question 4. Which measure of spread would you use and why? If you wanted to measure the central tendency which measure would you use and why?
+
+
+## Problem 6 (5 pts)
+Compute 3 measures of spread and 2 measures of central tendency for the PINE and NFDR watershed. (hint: use group_by() and summarize()) Be sure your code outputs the result. Which watershed has higher flow? Which one has more variable flow? How do you know?
+```{r}
+flow_sum <- pine_nfdr %>% 
+  group_by(StationID) %>% 
+  summarize(var = var(cfs), sd = sd(cfs), cv = sd(cfs)/mean(cfs), mean = mean(cfs), median = median(cfs), iqr = IQR(cfs))
+
+
+```
+

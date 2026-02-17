@@ -6,7 +6,7 @@ output:
     toc_float: true
 ---
 
-# Lab 3: Statistics in hydrology (25 pts)
+# Lab 3: Statistics in hydrology (19 pts)
 
 Reading for this lab: 
 
@@ -22,7 +22,7 @@ Questions from the reading (3 pts):
 
 Repo for this lab:
 
-[**The repo for this lab can be found here**](https://github.com/tpcovino/08_stats_lab){target="_blank"}
+[**The repo for this lab can be found here**](https://github.com/tpcovino/stats_lab){target="_blank"}
 
 Address each of the questions in the code chunk below and/or by typing outside the chunk (for written answers).
 
@@ -68,7 +68,7 @@ Calculate the SD and IQR for precipitation for the MtnsWest and Northeast ag-eco
 ```
 
 
-## Problem 3 (4 pts)
+## Problem 3 (2 pts)
 Next, make Q-Q plots and perform a Shapiro-Wilk test for normality on the precipitation data sets for the MtnsWest and Northeast ag-ecoregions. Using the results from these tests discuss whether or not the distributions are normal. Also if you based your decision as to whether the data sets were normal on the pdfs you developed in problem 1, the Q-Q test, and Shapiro-Wilk test would each lead you to same conclusion? Please comment. 
 
 ```{r}
@@ -77,7 +77,7 @@ Next, make Q-Q plots and perform a Shapiro-Wilk test for normality on the precip
 
 ```
 
-## Problem 4 (5 pts)
+## Problem 4 (2 pts)
 Make a plot that shows the distribution of the data from the PINE watershed and the NFDR watershed (two pdfs on the same plot). Log the x axis, label the x axis "Flow (cfs)" and the y axis "Density". 
 
 ```{r}
@@ -86,11 +86,11 @@ Make a plot that shows the distribution of the data from the PINE watershed and 
 
 ```
 
-## Problem 5 (5 pts)
+## Problem 5 (3 pts)
 You want to compare how variable the discharge is in each of the watersheds in question 4. Which measure of spread would you use and why? If you wanted to measure the central tendency which measure would you use and why?
 
 
-## Problem 6 (5 pts)
+## Problem 6 (3 pts)
 Compute 3 measures of spread and 2 measures of central tendency for the PINE and NFDR watershed. (hint: use group_by() and summarize()) Be sure your code outputs the result. Which watershed has higher flow? Which one has more variable flow? How do you know?
 ```{r}
 
